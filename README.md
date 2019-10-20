@@ -1,5 +1,7 @@
 # Parse AU BoM Observations
 
+![](https://github.com/weather-balloon/lib-cs-parse-bom-observations/workflows/Build/badge.svg)
+
 C# library for parsing AU BoM observation data
 
 
