@@ -1,0 +1,104 @@
+<?xml version='1.0'?>
+<product xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' version='v1.7.1' xsi:noNamespaceSchemaLocation='http://www.bom.gov.au/schema/v1.7/product.xsd'>
+  <amoc>
+    <source>
+      <sender>Australian Government Bureau of Meteorology</sender>
+      <region>Queensland</region>
+      <office>QLDRO</office>
+      <copyright>http://www.bom.gov.au/other/copyright.shtml</copyright>
+      <disclaimer>http://www.bom.gov.au/other/disclaimer.shtml</disclaimer>
+    </source>
+    <identifier>IDQ60920</identifier>
+    <issue-time-utc>2018-09-12T01:51:01+00:00</issue-time-utc>
+    <issue-time-local tz='EST'>2018-09-12T11:51:01+10:00</issue-time-local>
+    <sent-time>2018-09-12T01:52:12+00:00</sent-time>
+    <status>O</status>
+    <service>WSP</service>
+    <product-type>O</product-type>
+    <phase>NEW</phase>
+  </amoc>
+  <observations>
+    <station wmo-id='94576' bom-id='040913' tz='Australia/Brisbane' stn-name='BRISBANE' stn-height='8.13' type='AWS' lat='-27.4808' lon='153.0389' forecast-district-id='QLD_PW015' description='Brisbane'>
+      <period index='0' time-utc='2018-09-12T01:50:00+00:00' time-local='2018-09-12T11:50:00+10:00' wind-src='OMD'>
+        <level index='0' type='surface'>
+          <element units='Celsius' type='apparent_temp'>22.6</element>
+          <element units='Celsius' type='delta_t'>7.7</element>
+          <element units='km/h' type='gust_kmh'>13</element>
+          <element units='knots' type='wind_gust_spd'>7</element>
+          <element units='Celsius' type='air_temperature'>23.9</element>
+          <element units='Celsius' type='dew_point'>9.8</element>
+          <element units='%' type='rel-humidity'>40</element>
+          <element type='wind_dir'>NNE</element>
+          <element units='deg' type='wind_dir_deg'>33</element>
+          <element units='km/h' type='wind_spd_kmh'>7</element>
+          <element units='knots' type='wind_spd'>4</element>
+          <element start-time-local='2018-09-12T09:00:00+10:00' end-time-local='2018-09-12T11:52:00+10:00' duration='172' start-time-utc='2018-09-11T23:00:00+00:00' end-time-utc='2018-09-12T01:52:00+00:00' units='mm' type='rainfall'>0.0</element>
+          <element start-time-local='2018-09-11T09:00:00+10:00' end-time-local='2018-09-12T09:00:00+10:00' duration='1440' start-time-utc='2018-09-10T23:00:00+00:00' end-time-utc='2018-09-11T23:00:00+00:00' units='mm' type='rainfall_24hr'>0.0</element>
+          <element start-time-local='2018-09-12T06:00:00+10:00' end-time-local='2018-09-12T21:00:00+10:00' start-time-utc='2018-09-11T20:00:00+00:00' end-time-utc='2018-09-12T11:00:00+00:00' units='Celsius' type='maximum_air_temperature' instance='running' time-utc='2018-09-12T01:46:00+00:00' time-local='2018-09-12T11:46:00+10:00'>24.7</element>
+          <element start-time-local='2018-09-11T18:00:00+10:00' end-time-local='2018-09-12T09:00:00+10:00' start-time-utc='2018-09-11T08:00:00+00:00' end-time-utc='2018-09-11T23:00:00+00:00' units='Celsius' type='minimum_air_temperature' instance='running' time-utc='2018-09-11T19:46:00+00:00' time-local='2018-09-12T05:46:00+10:00'>13.2</element>
+          <element start-time-local='2018-09-12T00:00:00+10:00' end-time-local='2018-09-13T00:00:00+10:00' start-time-utc='2018-09-11T14:00:00+00:00' end-time-utc='2018-09-12T14:00:00+00:00' units='knots' type='maximum_gust_spd' instance='running' time-utc='2018-09-12T01:41:00+00:00' time-local='2018-09-12T11:41:00+10:00'>8</element>
+          <element start-time-local='2018-09-12T00:00:00+10:00' end-time-local='2018-09-13T00:00:00+10:00' start-time-utc='2018-09-11T14:00:00+00:00' end-time-utc='2018-09-12T14:00:00+00:00' units='km/h' type='maximum_gust_kmh' instance='running' time-utc='2018-09-12T01:41:00+00:00' time-local='2018-09-12T11:41:00+10:00'>15</element>
+          <element start-time-local='2018-09-12T00:00:00+10:00' end-time-local='2018-09-13T00:00:00+10:00' start-time-utc='2018-09-11T14:00:00+00:00' end-time-utc='2018-09-12T14:00:00+00:00' type='maximum_gust_dir' instance='running' time-utc='2018-09-12T01:41:00+00:00' time-local='2018-09-12T11:41:00+10:00'>ENE</element>
+        </level>
+      </period>
+    </station>
+    <station wmo-id='94578' bom-id='040842' tz='Australia/Brisbane' stn-name='BRISBANE AERO' stn-height='4.51' type='AWS' lat='-27.3917' lon='153.1292' forecast-district-id='QLD_PW015' description='Brisbane Airport'>
+      <period index='0' time-utc='2018-09-12T01:50:00+00:00' time-local='2018-09-12T11:50:00+10:00' wind-src='OMD'>
+        <level index='0' type='surface'>
+          <element units='Celsius' type='apparent_temp'>18.9</element>
+          <element type='cloud'>Clear</element>
+          <element type='cloud_oktas'>0</element>
+          <element units='Celsius' type='delta_t'>6.7</element>
+          <element units='km/h' type='gust_kmh'>17</element>
+          <element units='knots' type='wind_gust_spd'>9</element>
+          <element units='Celsius' type='air_temperature'>21.9</element>
+          <element units='Celsius' type='dew_point'>9.4</element>
+          <element units='hPa' type='pres'>1020.5</element>
+          <element units='hPa' type='qnh_pres'>1020.5</element>
+          <element units='%' type='rel-humidity'>45</element>
+          <element units='km' type='vis_km'>44</element>
+          <element type='wind_dir'>NNE</element>
+          <element units='deg' type='wind_dir_deg'>27</element>
+          <element units='km/h' type='wind_spd_kmh'>15</element>
+          <element units='knots' type='wind_spd'>8</element>
+          <element start-time-local='2018-09-12T09:00:00+10:00' end-time-local='2018-09-12T11:52:00+10:00' duration='172' start-time-utc='2018-09-11T23:00:00+00:00' end-time-utc='2018-09-12T01:52:00+00:00' units='mm' type='rainfall'>0.0</element>
+          <element start-time-local='2018-09-11T09:00:00+10:00' end-time-local='2018-09-12T09:00:00+10:00' duration='1440' start-time-utc='2018-09-10T23:00:00+00:00' end-time-utc='2018-09-11T23:00:00+00:00' units='mm' type='rainfall_24hr'>0.0</element>
+          <element start-time-local='2018-09-12T06:00:00+10:00' end-time-local='2018-09-12T21:00:00+10:00' start-time-utc='2018-09-11T20:00:00+00:00' end-time-utc='2018-09-12T11:00:00+00:00' units='Celsius' type='maximum_air_temperature' instance='running' time-utc='2018-09-12T01:21:00+00:00' time-local='2018-09-12T11:21:00+10:00'>23.1</element>
+          <element start-time-local='2018-09-11T18:00:00+10:00' end-time-local='2018-09-12T09:00:00+10:00' start-time-utc='2018-09-11T08:00:00+00:00' end-time-utc='2018-09-11T23:00:00+00:00' units='Celsius' type='minimum_air_temperature' instance='running' time-utc='2018-09-11T19:18:00+00:00' time-local='2018-09-12T05:18:00+10:00'>12.9</element>
+          <element start-time-local='2018-09-12T00:00:00+10:00' end-time-local='2018-09-13T00:00:00+10:00' start-time-utc='2018-09-11T14:00:00+00:00' end-time-utc='2018-09-12T14:00:00+00:00' units='knots' type='maximum_gust_spd' instance='running' time-utc='2018-09-12T00:41:00+00:00' time-local='2018-09-12T10:41:00+10:00'>16</element>
+          <element start-time-local='2018-09-12T00:00:00+10:00' end-time-local='2018-09-13T00:00:00+10:00' start-time-utc='2018-09-11T14:00:00+00:00' end-time-utc='2018-09-12T14:00:00+00:00' units='km/h' type='maximum_gust_kmh' instance='running' time-utc='2018-09-12T00:41:00+00:00' time-local='2018-09-12T10:41:00+10:00'>30</element>
+          <element start-time-local='2018-09-12T00:00:00+10:00' end-time-local='2018-09-13T00:00:00+10:00' start-time-utc='2018-09-11T14:00:00+00:00' end-time-utc='2018-09-12T14:00:00+00:00' type='maximum_gust_dir' instance='running' time-utc='2018-09-12T00:41:00+00:00' time-local='2018-09-12T10:41:00+10:00'>N</element>
+        </level>
+      </period>
+    </station>
+    <station wmo-id='94568' bom-id='040004' tz='Australia/Brisbane' stn-name='AMBERLEY AMO' stn-height='24.20' type='AWS' lat='-27.6297' lon='152.7111' forecast-district-id='QLD_PW015' description='Amberley'>
+      <period index='0' time-utc='2018-09-12T01:50:00+00:00' time-local='2018-09-12T11:50:00+10:00' wind-src='OMD'>
+        <level index='0' type='surface'>
+          <element units='Celsius' type='apparent_temp'>21.4</element>
+          <element type='cloud'>Mostly clear</element>
+          <element type='cloud_oktas'>1</element>
+          <element units='Celsius' type='delta_t'>7.4</element>
+          <element units='km/h' type='gust_kmh'>9</element>
+          <element units='knots' type='wind_gust_spd'>5</element>
+          <element units='Celsius' type='air_temperature'>22.9</element>
+          <element units='Celsius' type='dew_point'>9.1</element>
+          <element units='hPa' type='pres'>1019.9</element>
+          <element units='hPa' type='qnh_pres'>1019.9</element>
+          <element units='%' type='rel-humidity'>41</element>
+          <element units='km' type='vis_km'>48</element>
+          <element type='wind_dir'>E</element>
+          <element units='deg' type='wind_dir_deg'>86</element>
+          <element units='km/h' type='wind_spd_kmh'>7</element>
+          <element units='knots' type='wind_spd'>4</element>
+          <element start-time-local='2018-09-12T09:00:00+10:00' end-time-local='2018-09-12T11:52:00+10:00' duration='172' start-time-utc='2018-09-11T23:00:00+00:00' end-time-utc='2018-09-12T01:52:00+00:00' units='mm' type='rainfall'>0.0</element>
+          <element start-time-local='2018-09-11T09:00:00+10:00' end-time-local='2018-09-12T09:00:00+10:00' duration='1440' start-time-utc='2018-09-10T23:00:00+00:00' end-time-utc='2018-09-11T23:00:00+00:00' units='mm' type='rainfall_24hr'>0.0</element>
+          <element start-time-local='2018-09-12T06:00:00+10:00' end-time-local='2018-09-12T21:00:00+10:00' start-time-utc='2018-09-11T20:00:00+00:00' end-time-utc='2018-09-12T11:00:00+00:00' units='Celsius' type='maximum_air_temperature' instance='running' time-utc='2018-09-12T01:24:00+00:00' time-local='2018-09-12T11:24:00+10:00'>24.8</element>
+          <element start-time-local='2018-09-11T18:00:00+10:00' end-time-local='2018-09-12T09:00:00+10:00' start-time-utc='2018-09-11T08:00:00+00:00' end-time-utc='2018-09-11T23:00:00+00:00' units='Celsius' type='minimum_air_temperature' instance='running' time-utc='2018-09-11T20:08:00+00:00' time-local='2018-09-12T06:08:00+10:00'>7.5</element>
+          <element start-time-local='2018-09-12T00:00:00+10:00' end-time-local='2018-09-13T00:00:00+10:00' start-time-utc='2018-09-11T14:00:00+00:00' end-time-utc='2018-09-12T14:00:00+00:00' units='knots' type='maximum_gust_spd' instance='running' time-utc='2018-09-12T01:32:00+00:00' time-local='2018-09-12T11:32:00+10:00'>10</element>
+          <element start-time-local='2018-09-12T00:00:00+10:00' end-time-local='2018-09-13T00:00:00+10:00' start-time-utc='2018-09-11T14:00:00+00:00' end-time-utc='2018-09-12T14:00:00+00:00' units='km/h' type='maximum_gust_kmh' instance='running' time-utc='2018-09-12T01:32:00+00:00' time-local='2018-09-12T11:32:00+10:00'>19</element>
+          <element start-time-local='2018-09-12T00:00:00+10:00' end-time-local='2018-09-13T00:00:00+10:00' start-time-utc='2018-09-11T14:00:00+00:00' end-time-utc='2018-09-12T14:00:00+00:00' type='maximum_gust_dir' instance='running' time-utc='2018-09-12T01:32:00+00:00' time-local='2018-09-12T11:32:00+10:00'>NNE</element>
+        </level>
+      </period>
+    </station>
+	</observations>
+</product>

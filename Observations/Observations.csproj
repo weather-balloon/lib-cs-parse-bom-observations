@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>Observations</RootNamespace>
+    <Description>C# library for parsing AU BoM observation data</Description>
+    <Authors>Duncan Dickinson</Authors>
+    <Copyright>2019</Copyright>
+    <PackageTags>data</PackageTags>
+    <PackageProjectUrl>https://github.com/weather-balloon/lib-cs-parse-bom-observations</PackageProjectUrl>
+    <PackageLicenseExpression>BSD-2-Clause</PackageLicenseExpression>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/weather-balloon/lib-cs-parse-bom-observations</RepositoryUrl>
+  </PropertyGroup>
+
+</Project>
