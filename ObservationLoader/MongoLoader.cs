@@ -17,6 +17,12 @@ namespace WeatherBalloon.ObservationLoader
     {
         public string ConnectionString { get; set; }
 
+        public string Username { get; set; }
+
+        public string Password { get; set; }
+
+        public string Server { get; set; }
+
         public string DatabaseName { get; set; }
 
         public string CollectionName { get; set; }
@@ -51,9 +57,21 @@ namespace WeatherBalloon.ObservationLoader
         {
             if (_client is null)
             {
-                MongoClientSettings settings = MongoClientSettings.FromUrl(
-                    new MongoUrl(_config.ConnectionString)
-                );
+                MongoClientSettings settings;
+                string connStr = !string.IsNullOrEmpty(_config.ConnectionString) ? _config.ConnectionString : $"mongodb://{_config.Username}:{_config.Password}@{_config.Server}";
+
+                try
+                {
+                    settings = MongoClientSettings.FromUrl(
+                       new MongoUrl(connStr)
+                   );
+                }
+                catch (MongoConfigurationException e)
+                {
+                    _logger.LogError($"Failed to connect to the datastore (configuration).");
+                    return false;
+                }
+
                 _logger.LogDebug($"Data store URL: {settings.Server}");
                 settings.SslSettings =
                     new SslSettings() { EnabledSslProtocols = SslProtocols.Tls12 };
@@ -81,9 +99,15 @@ namespace WeatherBalloon.ObservationLoader
             }
             catch (TimeoutException e)
             {
-                _logger.LogError($"Failed to connect to the datastore. {e.Message}");
+                _logger.LogError($"Failed to connect to the datastore (timeout). {e.Message}");
                 return false;
             }
+            catch (MongoAuthenticationException e)
+            {
+                _logger.LogError($"Failed to connect to the datastore (authentication). {e.Message}");
+                return false;
+            }
+
 
         }
 

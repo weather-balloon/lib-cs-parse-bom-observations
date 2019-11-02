@@ -4,6 +4,7 @@ services:
   ftp:
     build: ./ftp-test
     image: ftp-test
+    restart: always
     ports:
       - "2020-2021:2020-2021"
       - "65500-65515:65500-65515"
@@ -16,6 +17,8 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: dba
       MONGO_INITDB_ROOT_PASSWORD: mongo
+    volumes:
+      - "$PWD/mongo-entrypoint/:/docker-entrypoint-initdb.d/"
 
 volumes:
   mongovolume: {}
