@@ -1,0 +1,7 @@
+.git
+.vscode
+notes
+**/obj
+**/bin
+README.md
+ftp-test

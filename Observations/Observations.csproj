@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
     <RootNamespace>Observations</RootNamespace>
     <Description>C# library for parsing AU BoM observation data</Description>
     <Authors>Duncan Dickinson</Authors>
@@ -12,5 +12,8 @@
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/weather-balloon/lib-cs-parse-bom-observations</RepositoryUrl>
   </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="MongoDB.Driver" Version="2.9.2" />
+  </ItemGroup>
 
 </Project>

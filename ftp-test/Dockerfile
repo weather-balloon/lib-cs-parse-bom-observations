@@ -19,9 +19,11 @@ RUN chmod +x /usr/sbin/loader.sh && /usr/sbin/loader.sh
 COPY vsftpd.conf /etc/vsftpd/
 
 RUN chown root.root /etc/vsftpd/vsftpd.conf \
-    && mkdir -p /var/run/vsftpd/empty
+    && mkdir -p /var/run/vsftpd/empty \
+    && touch /var/log/vsftpd.log
 
 CMD ["/usr/sbin/vsftpd", "/etc/vsftpd/vsftpd.conf"]
 
 # Build: docker build -t ftp-test .
 # Run: docker run -d -p 2020-2021:2020-2021 -p 65500-65515:65500-65515 ftp-test
+# Check the logs: docker exec ftp-test tail -f /var/log/vsftpd.log

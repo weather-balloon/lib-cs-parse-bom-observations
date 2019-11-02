@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  ftp:
+    build: ./ftp-test
+    image: ftp-test
+    ports:
+      - "2020-2021:2020-2021"
+      - "65500-65515:65500-65515"
+
+  mongo:
+    image: mongo:4.2-bionic
+    ports:
+      - "27017:27017"
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: dba
+      MONGO_INITDB_ROOT_PASSWORD: mongo
+
+volumes:
+  mongovolume: {}

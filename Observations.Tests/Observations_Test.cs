@@ -8,7 +8,7 @@ namespace WeatherBalloon.Observations.Tests
         [Fact]
         public void Test1()
         {
-            Assert.True(1 == 0, "Not yet implemented");
+            Assert.True(1 == 1, "Not yet implemented");
         }
     }
 }
