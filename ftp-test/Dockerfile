@@ -3,7 +3,7 @@ FROM alpine:3
 RUN apk add vsftpd ncftp
 
 EXPOSE 2020-2021
-EXPOSE 65500-65515
+EXPOSE 64000-64999
 
 RUN mkdir /var/ftp
 WORKDIR /var/ftp

@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.AzureAppConfiguration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using WeatherBalloon.Observations;
 
 namespace WeatherBalloon.ObservationLoader
 {
@@ -16,7 +18,6 @@ namespace WeatherBalloon.ObservationLoader
         public const string CONFIG_OBSERVICE_SECTION_NAME = "ObservationService";
         public const string ENVVAR_PREFIX = "OBS_";
 
-
         public static IConfiguration GetConfiguration()
         {
             string env = Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT");
@@ -27,15 +28,15 @@ namespace WeatherBalloon.ObservationLoader
                     optional: true,
                     reloadOnChange: false);
 
+            builder.AddJsonFile($"appsettings.{env}.json",
+                optional: true,
+                reloadOnChange: false);
+
             if (env == Environments.Development)
             {
                 builder.AddUserSecrets<DataStoreConfiguration>();
                 builder.AddUserSecrets<FtpServiceConfiguration>();
             }
-
-            builder.AddJsonFile($"appsettings.{env}.json",
-                optional: true,
-                reloadOnChange: false);
 
             builder.AddEnvironmentVariables(ENVVAR_PREFIX);
 
@@ -53,9 +54,12 @@ namespace WeatherBalloon.ObservationLoader
 
             config = builder.Build();
 
-            if (config.GetSection("KeyVault").Exists() && !string.IsNullOrEmpty(config["azureKeyVault:vault"]))
+            string vault = config.GetValue<string>("KeyVault");
+
+            if (!string.IsNullOrEmpty(vault))
             {
-                builder.AddAzureKeyVault($"https://{config["azureKeyVault:vault"]}.vault.azure.net/");
+                Console.WriteLine(vault);
+                builder.AddAzureKeyVault($"https://{vault}.vault.azure.net/");
             }
 
             return builder.Build();
@@ -67,7 +71,6 @@ namespace WeatherBalloon.ObservationLoader
                 Acknowledging https://github.com/PioneerCode/pioneer-console-boilerplate/tree/master/src/Pioneer.Console.Boilerplate
              */
 
-
             // build configuration
             var configuration = GetConfiguration();
 
@@ -77,7 +80,7 @@ namespace WeatherBalloon.ObservationLoader
                 configuration.GetSection(CONFIG_SECTION_NAME).GetSection(CONFIG_DATASTORE_SECTION_NAME));
 
             serviceCollection.Configure<FtpServiceConfiguration>(
-            configuration.GetSection(CONFIG_SECTION_NAME).GetSection(CONFIG_OBSERVICE_SECTION_NAME));
+                configuration.GetSection(CONFIG_SECTION_NAME).GetSection(CONFIG_OBSERVICE_SECTION_NAME));
 
             // add logging
             serviceCollection.AddSingleton(LoggerFactory.Create(builder =>
@@ -105,17 +108,34 @@ namespace WeatherBalloon.ObservationLoader
 
             var dataStore = serviceProvider.GetService<IDataLoader>();
 
-            var observations = serviceProvider.GetService<IObservationService>().loadObservations();
+            IEnumerable<WeatherStationObservation> observations = null;
 
-            if (dataStore.connect() && observations != null && dataStore.upsertMany(observations))
+            if (!dataStore.connect())
             {
-                return 0;
-            }
-            else
-            {
-                //Console.Error.WriteLine("Failed to complete - please check logs");
+                Console.Error.WriteLine($"Error: Failed to connect to the datastore");
                 return 1;
             }
+
+            try
+            {
+                observations = serviceProvider.GetService<IObservationService>().loadObservations();
+            }
+            catch (ArgumentException e)
+            {
+                Console.Error.WriteLine($"Error: {e.Message}");
+                return 1;
+            }
+
+            if (observations != null)
+            {
+                if (dataStore.upsertMany(observations, maxRetries: 10, carriedOverErrors: null))
+                {
+                    return 0;
+                }
+            }
+
+            Console.Error.WriteLine("Error: Failed to complete - please check logs");
+            return 1;
 
         }
 

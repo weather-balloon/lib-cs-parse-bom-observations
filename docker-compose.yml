@@ -7,7 +7,7 @@ services:
     restart: always
     ports:
       - "2020-2021:2020-2021"
-      - "65500-65515:65500-65515"
+      - "64000-64999:64000-64999"
 
   mongo:
     image: mongo:4.2-bionic

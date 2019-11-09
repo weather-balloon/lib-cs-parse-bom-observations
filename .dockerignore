@@ -1,7 +1,12 @@
 .git
+.gitignore
+.github
 .vscode
+ftp-test
+mongo-entrypoint
 notes
 **/obj
 **/bin
+**/out
 README.md
-ftp-test
+LICENSE

@@ -5,7 +5,6 @@ using System.Net;
 using System.Text.Json;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-
 using WeatherBalloon.Observations;
 
 namespace WeatherBalloon.ObservationLoader
@@ -31,6 +30,16 @@ namespace WeatherBalloon.ObservationLoader
         {
             _logger = logger;
             _config = config.Value;
+
+            if (_config.BaseFtpUrl is null)
+            {
+                throw new ArgumentException("The observation FTP URL is null");
+            }
+
+            if (String.IsNullOrEmpty(_config.Product))
+            {
+                throw new ArgumentException("No observation product provided");
+            }
         }
 
         public IEnumerable<WeatherStationObservation> loadObservations()
