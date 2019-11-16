@@ -1,0 +1,4 @@
+AuditMode: false
+
+PasswordFields:
+  - _config.Password

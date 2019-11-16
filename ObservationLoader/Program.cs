@@ -99,6 +99,7 @@ namespace WeatherBalloon.ObservationLoader
 
         static int Main(string[] args)
         {
+
             // create service collection
             var serviceCollection = new ServiceCollection();
             ConfigureServices(serviceCollection);
