@@ -7,10 +7,12 @@
     <Authors>Duncan Dickinson</Authors>
     <Copyright>2019</Copyright>
     <PackageTags>data</PackageTags>
-    <PackageProjectUrl>https://github.com/weather-balloon/lib-cs-parse-bom-observations</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/weather-balloon/loader-bom-observations</PackageProjectUrl>
     <PackageLicenseExpression>BSD-2-Clause</PackageLicenseExpression>
     <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://github.com/weather-balloon/lib-cs-parse-bom-observations</RepositoryUrl>
+    <RepositoryUrl>https://github.com/weather-balloon/loader-bom-observations</RepositoryUrl>
+    <DocumentationFile>out/docs/$(AssemblyName).xml</DocumentationFile>
+    <NoWarn>$(NoWarn),SA1636,SA1623</NoWarn>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="MongoDB.Driver" Version="2.9.2" />

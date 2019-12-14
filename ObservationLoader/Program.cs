@@ -1,34 +1,94 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Configuration.AzureAppConfiguration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using WeatherBalloon.Observations;
+﻿//-----------------------------------------------------------------------
+// <copyright file="Program.cs" company="Weather Balloon">
+//     Copyright (c) Duncan Dickinson. BSD 2-Clause License.
+// </copyright>
+//-----------------------------------------------------------------------
 
 namespace WeatherBalloon.ObservationLoader
 {
-    class Program
+    using System;
+    using System.Collections.Generic;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.Configuration.AzureAppConfiguration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
+    using Microsoft.Extensions.Logging;
+    using WeatherBalloon.ObservationLoader.Cosmos;
+    using WeatherBalloon.ObservationLoader.Services.BoM;
+    using WeatherBalloon.Observations.Model;
+
+    /// <summary>CLI app.</summary>
+    public class Program
     {
+        /// <summary>General config section.</summary>
         public const string CONFIG_SECTION_NAME = "observations";
 
+        /// <summary>Section name for the data store config.</summary>
         public const string CONFIG_DATASTORE_SECTION_NAME = "DataStore";
 
+        /// <summary>Section name for the observation service config.</summary>
         public const string CONFIG_OBSERVICE_SECTION_NAME = "ObservationService";
+
+        /// <summary>Environment variable prefix.</summary>
         public const string ENVVAR_PREFIX = "OBS_";
 
-        public static IConfiguration GetConfiguration()
+        /// <summary>Main method.</summary>
+        /// <param name="args">Command-line arguments.</param>
+        /// <returns>0 if success, non-zero otherwise.</returns>
+        public static int Main(string[] args)
+        {
+            // create service collection
+            var serviceCollection = new ServiceCollection();
+            ConfigureServices(serviceCollection);
+
+            // create service provider
+            var serviceProvider = serviceCollection.BuildServiceProvider();
+
+            var dataStore = serviceProvider.GetService<IDataLoader>();
+
+            IEnumerable<WeatherStationObservation> observations = null;
+
+            if (!dataStore.Connect())
+            {
+                Console.Error.WriteLine($"Error: Failed to connect to the datastore");
+                return 1;
+            }
+
+            try
+            {
+                observations = serviceProvider.GetService<IObservationService>().LoadObservations();
+            }
+            catch (ArgumentException e)
+            {
+                Console.Error.WriteLine($"Error: {e.Message}");
+                return 1;
+            }
+
+            if (observations != null)
+            {
+                if (dataStore.UpsertMany(observations, maxRetries: 10, carriedOverErrors: null))
+                {
+                    return 0;
+                }
+            }
+
+            Console.Error.WriteLine("Error: Failed to complete - please check logs");
+            return 1;
+        }
+
+        private static IConfiguration GetConfiguration()
         {
             string env = Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT");
 
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Environment.CurrentDirectory)
-                .AddJsonFile("appsettings.json",
+                .AddJsonFile(
+                    "appsettings.json",
                     optional: true,
                     reloadOnChange: false);
 
-            builder.AddJsonFile($"appsettings.{env}.json",
+            builder.AddJsonFile(
+                $"appsettings.{env}.json",
                 optional: true,
                 reloadOnChange: false);
 
@@ -94,51 +154,6 @@ namespace WeatherBalloon.ObservationLoader
             // add services
             serviceCollection.AddSingleton<IObservationService, BomFtpService>();
             serviceCollection.AddSingleton<IDataLoader, MongoDataLoader>();
-
         }
-
-        static int Main(string[] args)
-        {
-
-            // create service collection
-            var serviceCollection = new ServiceCollection();
-            ConfigureServices(serviceCollection);
-
-            // create service provider
-            var serviceProvider = serviceCollection.BuildServiceProvider();
-
-            var dataStore = serviceProvider.GetService<IDataLoader>();
-
-            IEnumerable<WeatherStationObservation> observations = null;
-
-            if (!dataStore.connect())
-            {
-                Console.Error.WriteLine($"Error: Failed to connect to the datastore");
-                return 1;
-            }
-
-            try
-            {
-                observations = serviceProvider.GetService<IObservationService>().loadObservations();
-            }
-            catch (ArgumentException e)
-            {
-                Console.Error.WriteLine($"Error: {e.Message}");
-                return 1;
-            }
-
-            if (observations != null)
-            {
-                if (dataStore.upsertMany(observations, maxRetries: 10, carriedOverErrors: null))
-                {
-                    return 0;
-                }
-            }
-
-            Console.Error.WriteLine("Error: Failed to complete - please check logs");
-            return 1;
-
-        }
-
     }
 }

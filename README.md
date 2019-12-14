@@ -17,6 +17,9 @@ the Cosmos DB connection string. There is a
 operation in the Cosmos API and this is
 [described in the docs](https://docs.microsoft.com/en-us/azure/cosmos-db/secure-access-to-data#users)
 but, for now, I'll keep it simple.
+* Cosmos uses rate limiting (provisioned throughput) that means we need a retry mechanism
+for bulk updates. The new [autopilot mode](https://docs.microsoft.com/en-us/azure/cosmos-db/provision-throughput-autopilot) could help shaping the allowed throughput rather than having
+requests having to wait.
 
 ## Building
 
